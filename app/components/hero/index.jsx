@@ -5,12 +5,10 @@ import StarField from './StarField';
 import Magnetic from './Magnetic';
 import { useQuantumDecode } from '../../hooks/useQuantumDecode';
 
-const TAGS = ['Web Development', 'Software Architecture', 'Game Prototyping', 'Cloud Solutions'];
+const TAGS = ['Web Development', 'Software Architecture', 'Cloud Solutions'];
 const ROLES = [
   'Full-Stack Developer',
   'Software Engineer',
-  'Cloud Solutions Architect',
-  'Game Prototyper',
 ];
 
 function HexTag({ label }) {
@@ -229,8 +227,8 @@ export default function Hero() {
             className="text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
             style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-space)' }}
           >
-            I build full-stack web apps with a focus on clean architecture and user-centric design.
-            3+ years delivering production-ready solutions across React, Node.js, cloud platforms, and Unity game prototypes.
+            Computer Science Engineer with hands-on experience building backend and full-stack applications using Node.js/TypeScript and Java/Spring Boot.
+            Experienced with REST APIs, Docker, CI/CD and AI integration, with internship experience delivering business software and recruitment automation.
           </motion.p>
 
           {/* Tags */}

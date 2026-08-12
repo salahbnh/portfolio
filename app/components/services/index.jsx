@@ -5,17 +5,17 @@ import {
   GlobeAmericasIcon,
   ServerIcon,
   CommandLineIcon,
-  RocketLaunchIcon,
+  SparklesIcon ,
   CubeIcon,
 } from '@heroicons/react/24/outline';
 
 const services = [
-  { title: 'Backend Development',  desc: 'Architecting high-performance server solutions with Node.js, Spring Boot, and real-time database systems',                                                     Icon: ServerStackIcon  },
-  { title: 'Frontend Engineering', desc: 'Building immersive web experiences with responsive layouts, fluid animations, and Three.js 3D integrations',                                                 Icon: GlobeAmericasIcon },
-  { title: 'Game Development',     desc: 'Creating 3D game environments and complex gameplay mechanics using Unity Engine and C# scripting',                                                            Icon: CubeIcon          },
-  { title: 'API Architecture',     desc: 'Enterprise-grade API development with REST/GraphQL standards, JWT authentication, and Redis caching',                                                         Icon: ServerIcon        },
-  { title: 'DevOps Automation',    desc: 'Implementing CI/CD pipelines with Docker, Kubernetes, and GitHub Actions for zero-downtime deployments',                                                     Icon: CommandLineIcon   },
-  { title: 'Technical Leadership', desc: 'Leading cross-functional teams in Agile environments with architectural decision ownership and code reviews',                                                  Icon: RocketLaunchIcon  },
+  { title: 'Backend Development',  desc: 'Architecting reliable server-side applications with Node.js, TypeScript, and Spring Boot, with a focus on scalable APIs and clean architecture.',                                                     Icon: ServerStackIcon  },
+  { title: 'Frontend Engineering', desc: 'Building responsive web applications with React, Next.js, Angular, animations, and interactive 3D experiences with Three.js.',                                                 Icon: GlobeAmericasIcon },
+  { title: 'Game Development',     desc: 'Creating 3D game environments and gameplay systems using Unity, C#, physics, and AI-driven game mechanics.',                                                            Icon: CubeIcon          },
+  { title: 'API Architecture',     desc: 'Designing secure REST APIs with JWT authentication, validation, caching, background processing, and third-party integrations.',                                                         Icon: ServerIcon        },
+  { title: 'AI & Machine Learning', desc: 'Integrating AI into real-world applications using Hugging Face, FLAN-T5, LoRA/PEFT, and generative AI APIs.',                                                     Icon: SparklesIcon    },
+  { title: 'DevOps & Cloud', desc: 'Containerizing applications with Docker and automating build, test, and deployment workflows through CI/CD pipelines.',                                                  Icon: CommandLineIcon   },
 ];
 
 function ServiceCard({ service, index }) {
