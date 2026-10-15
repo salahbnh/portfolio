@@ -2,7 +2,9 @@
 import { motion } from 'framer-motion';
 import ContactForm from './ContactForm';
 import Socials from './Socials';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+
+const CONTACT_EMAIL = 'bounhsalah@gmail.com';
 
 export default function ContactSection() {
   return (
@@ -56,6 +58,29 @@ export default function ContactSection() {
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-space)' }}>
               Whether it's a production web app, a 3D interactive experience, or an architecture consultation — I'm ready to collaborate.
             </p>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-space)' }}>
+              Based in Tunisia (UTC+1) · open to remote roles · comfortable with EU and US hours.
+            </p>
+
+            {/* Direct email */}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="inline-flex items-center gap-3 cursor-pointer"
+              style={{
+                fontFamily: 'var(--font-rajdhani)',
+                fontSize: '1.05rem',
+                fontWeight: 600,
+                letterSpacing: '0.06em',
+                color: 'var(--text-secondary)',
+                textDecoration: 'none',
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
+            >
+              <FaEnvelope aria-hidden="true" style={{ color: 'var(--primary)' }} />
+              {CONTACT_EMAIL}
+            </a>
 
             {/* Animated signal wave */}
             <svg width="130" height="32" viewBox="0 0 130 32" fill="none" style={{ opacity: 0.45 }}>
