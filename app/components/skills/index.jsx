@@ -46,7 +46,7 @@ export default function Skills() {
         }}
       >
         <p className="eyebrow" style={{ marginBottom: '0.5rem' }}>
-          // 002 &nbsp;&nbsp; TECH STACK
+          // 003 &nbsp;&nbsp; TECH STACK
         </p>
         <h2 className="text-3xl md:text-4xl font-orbitron text-gradient">
           Skills &amp; Technologies

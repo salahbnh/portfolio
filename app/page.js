@@ -18,6 +18,7 @@ const Spinner = () => (
 );
 
 const Projects       = dynamic(() => import('./components/Project'),                  { loading: () => <Spinner /> });
+const Experience     = dynamic(() => import('./components/experience'),               { loading: () => <Spinner /> });
 const ServicesSection = dynamic(() => import('./components/services'),                { loading: () => <Spinner /> });
 const ContactSection  = dynamic(() => import('./components/contact/ContactSection'),  { loading: () => <Spinner /> });
 
@@ -30,6 +31,9 @@ export default function Home() {
       </section>
       <section id="projects">
         <Projects />
+      </section>
+      <section id="experience">
+        <Experience />
       </section>
       <section id="skills">
         <SkillsClient />

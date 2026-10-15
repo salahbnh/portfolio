@@ -1,11 +1,12 @@
 'use client';
 
 const NAV_LINKS = [
-  { label: 'Home',     href: '#home' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills',   href: '#skills' },
-  { label: 'Services', href: '#services' },
-  { label: 'Contact',  href: '#contact' },
+  { label: 'Home',       href: '#home' },
+  { label: 'Projects',   href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills',     href: '#skills' },
+  { label: 'Services',   href: '#services' },
+  { label: 'Contact',    href: '#contact' },
 ];
 
 export default function Footer() {

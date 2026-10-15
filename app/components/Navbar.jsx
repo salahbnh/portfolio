@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_LINKS = [
-  { label: 'HOME',     href: '#home' },
-  { label: 'PROJECTS', href: '#projects' },
-  { label: 'SKILLS',   href: '#skills' },
-  { label: 'SERVICES', href: '#services' },
-  { label: 'CONTACT',  href: '#contact' },
+  { label: 'HOME',       href: '#home' },
+  { label: 'PROJECTS',   href: '#projects' },
+  { label: 'EXPERIENCE', href: '#experience' },
+  { label: 'SKILLS',     href: '#skills' },
+  { label: 'SERVICES',   href: '#services' },
+  { label: 'CONTACT',    href: '#contact' },
 ];
 
 function NavLink({ label, href, active }) {
@@ -76,7 +77,9 @@ export default function Navbar() {
       if (!el) return null;
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
-        { threshold: 0.35 }
+        // A thin band across the middle of the viewport: works for sections
+        // taller than the screen, where a ratio threshold would never be hit.
+        { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
       );
       obs.observe(el);
       return obs;
@@ -125,7 +128,7 @@ export default function Navbar() {
       </a>
 
       {/* Desktop links */}
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden md:flex items-center gap-5 lg:gap-8">
         {NAV_LINKS.map((link) => (
           <NavLink
             key={link.href}

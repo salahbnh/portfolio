@@ -110,7 +110,7 @@ export default function ServicesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="eyebrow mb-3">// 003 &nbsp;&nbsp; WHAT I DO</p>
+          <p className="eyebrow mb-3">// 004 &nbsp;&nbsp; WHAT I DO</p>
           <h2 className="text-4xl md:text-5xl font-orbitron text-gradient">Technical Services</h2>
           <p className="mt-4 max-w-xl mx-auto text-sm" style={{ color: 'var(--text-muted)' }}>
             Transforming complex requirements into elegant technical solutions

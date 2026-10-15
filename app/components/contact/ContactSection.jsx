@@ -34,7 +34,7 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="eyebrow mb-3">// 004 &nbsp;&nbsp; GET IN TOUCH</p>
+          <p className="eyebrow mb-3">// 005 &nbsp;&nbsp; GET IN TOUCH</p>
           <h2 className="text-4xl md:text-5xl font-orbitron text-gradient">Contact</h2>
         </motion.div>
 
