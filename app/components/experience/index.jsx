@@ -130,10 +130,12 @@ function SubProject({ project }) {
       <div className="flex flex-wrap gap-2 pt-1">
         {project.tools.map((tool) => <TechTag key={tool} tool={tool} />)}
       </div>
-      <div className="mt-auto pt-2">
-        {project.link ? (
+      <div className="mt-auto pt-2 flex flex-wrap gap-x-6 gap-y-2">
+        {project.links?.length ? (
+          project.links.map((link) => (
           <a
-            href={project.link.href}
+            key={link.href}
+            href={link.href}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 cursor-pointer"
@@ -150,8 +152,9 @@ function SubProject({ project }) {
             onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--primary-light)'; }}
           >
-            <FaGithub aria-hidden="true" /> {project.link.label}
+            <FaGithub aria-hidden="true" /> {link.label}
           </a>
+          ))
         ) : project.note ? (
           <span
             className="inline-flex items-center gap-2"

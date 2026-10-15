@@ -15,10 +15,13 @@ export const EXPERIENCE = [
         highlights: [
           '15 backend modules (~100 REST endpoints), 21 Prisma/PostgreSQL models and a 34-page Next.js 15 / React 19 app.',
           'Keycloak OIDC with 4-role RBAC, audit logging and a multi-step contract approval flow (HR → Manager → Direction) with generated PDFs; documents stored in MinIO/S3.',
-          '66 test files (Vitest, Supertest, Playwright) and AI-assisted candidate evaluation with the Claude API.',
+          '460+ backend tests (Vitest unit + Supertest integration against real PostgreSQL and S3 storage) running in GitHub Actions CI, Playwright e2e on the frontend, and AI-assisted candidate evaluation with the Claude API.',
         ],
         tools: ['TypeScript', 'Express', 'Prisma', 'PostgreSQL', 'Next.js 15', 'React 19', 'Keycloak'],
-        link: { href: 'https://github.com/salahbnh/esn_frontend', label: 'Frontend code' },
+        links: [
+          { href: 'https://github.com/salahbnh/esn_backend', label: 'Backend code' },
+          { href: 'https://github.com/salahbnh/esn_frontend', label: 'Frontend code' },
+        ],
       },
       {
         name: 'FinanceOS',
