@@ -108,9 +108,6 @@ function SkillIcon({ skill, baseAngle, radius, angleRef, dimmed, atlas, nodesRef
               textAlign: 'center',
             }}>
               <div style={{ fontSize: '12px', textTransform: 'uppercase', color: '#7dd3fc' }}>{skill.name}</div>
-              <div style={{ fontSize: '9px', opacity: 0.8, marginTop: '2px', letterSpacing: '0.04em' }}>
-                {skill.years} yrs · {skill.projects} projects
-              </div>
             </div>
           </Html>
         )}

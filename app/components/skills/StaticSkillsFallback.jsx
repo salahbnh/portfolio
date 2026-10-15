@@ -15,7 +15,7 @@ export default function StaticSkillsFallback({ note }) {
         alignItems: 'center',
         justifyContent: 'center',
         gap: '2rem',
-        padding: '6rem 1.5rem 2rem',
+        padding: '8.5rem 1.5rem 2rem',
         overflowY: 'auto',
       }}
     >
