@@ -11,22 +11,27 @@ const rajdhani = Rajdhani({
   display: "swap",
 });
 
+const SITE_URL = "https://www.salahbounouh.com";
+const TITLE = "Salah Bounouh – Full-Stack Software Engineer";
+const DESCRIPTION =
+  "Full-stack software engineer (Node.js/TypeScript, Java/Spring Boot, Next.js) based in Tunisia (UTC+1), open to remote roles. Projects, experience and CV.";
+
 export const metadata = {
-  title: "Salah Bounouh – Professional Portfolio & Projects",
-  description:
-    "Welcome to the portfolio of Salah Bounouh. Explore my projects, skills, and professional journey in web development, AI, and technology.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  authors: [{ name: "Salah Bounouh", url: SITE_URL }],
   openGraph: {
-    title: "Salah Bounouh – Professional Portfolio & Projects",
-    description:
-      "Discover innovative projects and technology solutions by Salah Bounouh. Dive into my work in web development, AI, and more.",
-    url: "https://salahbounouh.com",
-    siteName: "Salah Bounouh Portfolio",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: "Salah Bounouh",
     images: [
       {
-        url: "https://salahbounouh.com/me.jpg",
+        url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Salah Bounouh Portfolio",
+        alt: "Salah Bounouh – Full-Stack Software Engineer, open to remote roles",
       },
     ],
     locale: "en_US",
@@ -34,14 +39,12 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@my_twitter_handle",
-    title: "Salah Bounouh – Professional Portfolio & Projects",
-    description:
-      "Explore the portfolio of Salah Bounouh featuring innovative projects and a journey in web development and technology.",
-    images: ["https://salahbounouh.com/me.jpg"],
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og.png"],
   },
   alternates: {
-    canonical: "https://salahbounouh.com",
+    canonical: "/",
   },
 };
 

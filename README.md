@@ -22,7 +22,7 @@ My personal portfolio — a single-page Next.js site with an interactive 3D expe
 
 ## Sections
 
-`Home` · `Projects` · `Skills` (3D) · `Services` · `Contact`
+`Home` · `Projects` · `Experience` · `Skills` (3D) · `Services` · `Contact`
 
 ## Tech Stack
 
