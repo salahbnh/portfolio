@@ -1,74 +1,103 @@
 'use client';
 import { useState, useRef, useEffect, memo, useCallback } from 'react';
 import { XMarkIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { FaGithub } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
+// Full-stack work first. `link` = live site, `repo` = public GitHub repo; either
+// may be null. `keyTools` are the 3–4 tools shown on the card itself.
+const GITHUB = 'https://github.com/salahbnh';
+
 const projects = [
   {
     title: "NexusAI — AI SaaS Template",
     image: "/ai-saas.webp",
+    summary: "AI SaaS template with multi-model chat, image generation, Stripe billing and an admin panel.",
     description: "A commercial-grade SaaS template that gives developers a complete AI-powered web application out of the box. Includes a marketing site, authentication, subscription billing, admin panel, and multiple AI tools — all wired together and ready to deploy. Features multi-model AI chat with conversation history, AI Writer with 8 content templates, AI Image generator (DALL-E 3) with gallery, subscription billing with 3 tiers via Stripe, rate limiting, usage quotas, plan-based model access, and an admin panel with user management.",
     tools: ["Next.js 14", "TypeScript", "Tailwind CSS", "Prisma", "Neon Postgres", "Clerk", "Stripe", "Vercel AI SDK", "OpenAI", "Groq", "Anthropic", "Upstash Redis", "shadcn/ui"],
+    keyTools: ["Next.js 14", "TypeScript", "Prisma", "Stripe"],
     link: "https://ai-saas-phi-nine.vercel.app/",
+    repo: `${GITHUB}/ai_saas`,
   },
   {
     title: "Sassify — SaaS Template",
     image: "/sassify.webp",
-    description: "Sassify is a production-ready, full-stack SaaS template built with Next.js 14 App Router. It ships with a fully animated dark-first landing page — hero, features, pricing, testimonials, FAQ, and more — powered by Framer Motion and GSAP scroll animations with Lenis smooth scroll. The design language is modern dark cinema with glass morphism, fluid gradients, and micro-interactions throughout Beyond the landing page, it includes a complete multi-page application: dashboard, auth flows (Clerk), blog and docs powered by MDX, and a settings/billing area. Payments are handled via Stripe with checkout and webhooks, data persistence via Prisma + Postgres, and transactional emails via Resend and React Email. The UI is built on shadcn/ui with a custom component library of 20+ reusable primitives. Dark/light mode is supported out of the box.",
-    tools: ["Next.js 14", "TypeScript", "Tailwind CSS", "shadcn/ui", "Clerk", "Stripe", "Prisma", "Resend", "React Email", "Framer Motion", "GSAP", "Lenis", "Drei", "MDX", "next-themes", "Lucide   React"],    
+    summary: "Full-stack SaaS template with an animated landing page, Clerk auth, MDX blog/docs and Stripe billing.",
+    description: "Sassify is a production-ready, full-stack SaaS template built with Next.js 14 App Router. It ships with a fully animated dark-first landing page — hero, features, pricing, testimonials, FAQ, and more — powered by Framer Motion and GSAP scroll animations with Lenis smooth scroll. The design language is modern dark cinema with glass morphism, fluid gradients, and micro-interactions throughout. Beyond the landing page, it includes a complete multi-page application: dashboard, auth flows (Clerk), blog and docs powered by MDX, and a settings/billing area. Payments are handled via Stripe with checkout and webhooks, data persistence via Prisma + Postgres, and transactional emails via Resend and React Email. The UI is built on shadcn/ui with a custom component library of 20+ reusable primitives. Dark/light mode is supported out of the box.",
+    tools: ["Next.js 14", "TypeScript", "Tailwind CSS", "shadcn/ui", "Clerk", "Stripe", "Prisma", "Resend", "React Email", "Framer Motion", "GSAP", "Lenis", "Drei", "MDX", "next-themes", "Lucide React"],
+    keyTools: ["Next.js 14", "TypeScript", "Prisma", "Stripe"],
     link: "https://sassify-alpha.vercel.app/",
-  },
-  {
-    title: "Imaginify : AI Images Platform",
-    video: "/Imaginfy.mp4",
-    videoWebm: "/Imaginfy.webm",
-    poster: "/Imaginfy-poster.webp",
-    description: "Imaginify is a website for generating Images from input text with multiple model choices : SDXL(v1.0 pro, v0.9 prp, v1.6) and DallE. It include also AI Image modifications with an Input Image and a text prompt to describe the modifications. Add to this, users can upscale any giving image. The website also includes a community section 'Explore' to view the other user's generated images that they generated and choose to post it, with the name of the publisher, the prompt of the images and other configuration details of the Image prompt to inspire others. and users can interact by liking each other's images.",
-    tools: ["NextJs", "Firebase", "Stripe", "Stable Diffusion APIs", "DallE API"],
-    link: "#",
-  },
-  {
-    title: "Spicy Barbershop",
-    image: "/barber.webp",
-    description: "A modern and stylish website for a barbershop, allowing users to browse services, check availability, and book appointments online. Built with Next.js and deployed on Vercel.",
-    tools: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-    link: "https://spicy-barbershop.vercel.app/",
-  },
-  {
-    title: "MedVR",
-    image: "/medvr.webp",
-    description: "A modern clinic management platform that connects patients and doctors. It supports appointment booking, medical folder management, real-time notifications, and online payments. Built with React, Node.js, MongoDB, and Socket.IO.",
-    tools: ["React", "Node.js", "Express", "MongoDB", "Socket.IO"],
-    link: "https://my-app-kappa-gules-18.vercel.app/",
-  },
-  {
-    title: "AI parking with ML agent",
-    video: "/Ai_Parking.mp4",
-    videoWebm: "/Ai_Parking.webm",
-    poster: "/Ai_Parking-poster.webp",
-    description: "An AI-powered Unity project utilizing reinforcement learning with Unity ML-Agents to train a virtual car to master parking skills. The agent learns optimal parking strategies through trial and error, improving its performance over time while avoiding collisions and adhering to realistic driving behavior.",
-    tools: ["Unity Engine", "Unity ML-Agents Toolkit", "TensorFlow", "Python", "C#", "ONNX", "PyTorch", "TensorBoard"],
-    link: "#",
-  },
-  {
-    title: "Triple Pendulum simulation",
-    video: "/TripplePendulum.mp4",
-    videoWebm: "/TripplePendulum.webm",
-    poster: "/TripplePendulum-poster.webp",
-    description: "A Unity 3D project simulating a triple pendulum system using custom-built physics in C#. The simulation is based on mathematical models and scientific papers, bypassing Unity's built-in physics. Spheres represent the pendulum masses, and the system demonstrates chaotic behavior with sensitive dependence on initial conditions, leading to unpredictable motion dynamics.",
-    tools: ["Unity 3D", "C#", "Research-Driven Mathematical Physics"],
-    link: "#",
+    repo: `${GITHUB}/Sassify`,
   },
   {
     title: "E-commerce Dashboard",
     video: "/ecommerce-aymen.mp4",
     videoWebm: "/ecommerce-aymen.webm",
     poster: "/ecommerce-aymen-poster.webp",
-    description: "An e-commerce platform with a production-ready backend: all CRUD operations and REST APIs for admin and client flows using Node.js (TypeScript) following a 3-layer hexagonal architecture. Features Stripe payment integration, admin statistics/metrics for inventory monitoring, and Redis-based caching. The admin dashboard is built with React.js. Everything is fully containerized with Docker.",
-    tools: ["Node.js (TypeScript)", "Express.js", "MongoDB", "React.js", "Redis", "Stripe", "Docker"],
-    link: "#",
+    summary: "E-commerce REST API with Stripe payments, Redis caching and a React admin dashboard.",
+    description: "An e-commerce platform with a production-ready backend: all CRUD operations and REST APIs for admin and client flows using Node.js and Express, following a layered architecture (routes → controllers → services/models). Features Stripe payment integration, admin statistics/metrics for inventory monitoring, and Redis-based caching. The admin dashboard is built with React.js. Everything is fully containerized with Docker.",
+    tools: ["Node.js", "Express.js", "MongoDB", "React.js", "Redis", "Stripe", "Docker"],
+    keyTools: ["Node.js", "Express.js", "MongoDB", "Redis"],
+    link: null,
+    repo: `${GITHUB}/ecommerce-rest-api`,
+  },
+  {
+    title: "MedVR",
+    image: "/medvr.webp",
+    summary: "Clinic management platform with appointment booking, medical folders and real-time notifications.",
+    description: "A modern clinic management platform that connects patients and doctors. It supports appointment booking, medical folder management, real-time notifications, and online payments. Built with React, Node.js, MongoDB, and Socket.IO.",
+    tools: ["React", "Node.js", "Express", "MongoDB", "Socket.IO"],
+    keyTools: ["React", "Node.js", "MongoDB", "Socket.IO"],
+    link: "https://my-app-kappa-gules-18.vercel.app/",
+    repo: `${GITHUB}/MedVR`,
+  },
+  {
+    title: "Imaginify — AI Image Platform",
+    video: "/Imaginfy.mp4",
+    videoWebm: "/Imaginfy.webm",
+    poster: "/Imaginfy-poster.webp",
+    summary: "Text-to-image platform with multiple models, AI image editing, upscaling and a community feed.",
+    description: "Imaginify is a website for generating images from text prompts, with multiple model choices: SDXL (v1.0, v0.9, v1.6) and DALL·E. It also supports AI image editing: upload an input image and describe the changes in a text prompt. Users can also upscale any given image. A community \"Explore\" section shows the images other users chose to publish, with the publisher's name, the prompt and the generation settings to inspire others, and users can like each other's images.",
+    tools: ["Next.js", "Firebase", "Stripe", "Stable Diffusion APIs", "DALL·E API"],
+    keyTools: ["Next.js", "Firebase", "Stripe", "Stable Diffusion APIs"],
+    link: null,
+    repo: null,
+  },
+  {
+    title: "Spicy Barbershop",
+    image: "/barber.webp",
+    summary: "Barbershop website for browsing services, checking availability and booking appointments online.",
+    description: "A modern and stylish website for a barbershop, allowing users to browse services, check availability, and book appointments online. Built with Next.js and deployed on Vercel.",
+    tools: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    keyTools: ["Next.js", "React", "Tailwind CSS"],
+    link: "https://spicy-barbershop.vercel.app/",
+    repo: null,
+  },
+  {
+    title: "AI Parking with ML-Agents",
+    video: "/Ai_Parking.mp4",
+    videoWebm: "/Ai_Parking.webm",
+    poster: "/Ai_Parking-poster.webp",
+    summary: "Reinforcement-learning agent in Unity that learns to park a car without collisions.",
+    description: "An AI-powered Unity project utilizing reinforcement learning with Unity ML-Agents to train a virtual car to master parking skills. The agent learns optimal parking strategies through trial and error, improving its performance over time while avoiding collisions and adhering to realistic driving behavior.",
+    tools: ["Unity Engine", "Unity ML-Agents Toolkit", "TensorFlow", "Python", "C#", "ONNX", "PyTorch", "TensorBoard"],
+    keyTools: ["Unity ML-Agents Toolkit", "Python", "C#", "PyTorch"],
+    link: null,
+    repo: `${GITHUB}/AI_Parking`,
+  },
+  {
+    title: "Triple Pendulum Simulation",
+    video: "/TripplePendulum.mp4",
+    videoWebm: "/TripplePendulum.webm",
+    poster: "/TripplePendulum-poster.webp",
+    summary: "Chaotic triple-pendulum simulation with custom, research-based physics in Unity and C#.",
+    description: "A Unity 3D project simulating a triple pendulum system using custom-built physics in C#. The simulation is based on mathematical models and scientific papers, bypassing Unity's built-in physics. Spheres represent the pendulum masses, and the system demonstrates chaotic behavior with sensitive dependence on initial conditions, leading to unpredictable motion dynamics.",
+    tools: ["Unity 3D", "C#", "Research-Driven Mathematical Physics"],
+    keyTools: ["Unity 3D", "C#"],
+    link: null,
+    repo: null,
   },
 ];
 
@@ -91,6 +120,8 @@ function useTilt() {
 }
 
 // ─── Shared card shell ─────────────────────────────────────────────────────────
+// The whole card is clickable with the mouse; keyboard and screen-reader users
+// get a real <button> (the title, see CardBody) whose click bubbles up here.
 function CardShell({ tilt, onMouseMove, onMouseLeave, cardRef, children, onClick }) {
   return (
     <motion.div
@@ -100,16 +131,18 @@ function CardShell({ tilt, onMouseMove, onMouseLeave, cardRef, children, onClick
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
+      className="h-full"
       style={{ cursor: 'pointer' }}
     >
       <div
+        className="h-full"
         style={{
           transform: `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
           transition: 'transform 0.15s ease-out',
         }}
       >
         <div
-          className="card-scan relative rounded-xl p-4 h-full overflow-hidden"
+          className="card-scan group relative rounded-xl p-4 h-full overflow-hidden flex flex-col"
           style={{
             background: 'rgba(13,17,23,0.8)',
             border: '1px solid var(--border)',
@@ -237,13 +270,60 @@ function PreviewVideo({ project, badge }) {
   );
 }
 
+// ─── Card pieces ───────────────────────────────────────────────────────────────
+// Icon-only shortcut in the card corner: live site if there is one, else repo.
+function CardLink({ project }) {
+  const href = project.link || project.repo;
+  if (!href) return null;
+  const isRepo = !project.link;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={isRepo ? `${project.title} source code on GitHub` : `Open ${project.title} live site`}
+      onClick={(e) => e.stopPropagation()}
+      className="absolute top-6 right-6 z-10 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer"
+      style={{ background: 'rgba(5,7,15,0.8)', border: '1px solid var(--border-active)', backdropFilter: 'blur(4px)' }}
+    >
+      {isRepo
+        ? <FaGithub className="w-4 h-4" style={{ color: 'var(--primary)' }} aria-hidden="true" />
+        : <ArrowTopRightOnSquareIcon className="w-4 h-4" style={{ color: 'var(--primary)' }} aria-hidden="true" />}
+    </a>
+  );
+}
+
+function CardBody({ project }) {
+  return (
+    <div className="mt-4 flex flex-col gap-3 flex-1">
+      <h3 className="text-lg font-orbitron" style={{ color: 'var(--text-primary)' }}>
+        <button
+          type="button"
+          aria-haspopup="dialog"
+          className="text-left cursor-pointer rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
+          style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', font: 'inherit', outlineColor: 'var(--primary)' }}
+        >
+          {project.title}
+        </button>
+      </h3>
+      <p className="text-sm leading-relaxed" style={{ color: '#94a3b8', fontFamily: 'var(--font-space)' }}>
+        {project.summary}
+      </p>
+      <div className="flex flex-wrap gap-2 mt-auto pt-1">
+        {project.keyTools.map((tool) => <TechTag key={tool} tool={tool} />)}
+      </div>
+    </div>
+  );
+}
+
 // ─── Card variants ─────────────────────────────────────────────────────────────
 const ProjectVideoCard = memo(function ProjectVideoCard({ project, onClick }) {
   const { ref, tilt, onMouseMove, onMouseLeave } = useTilt();
   return (
     <CardShell tilt={tilt} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} cardRef={ref} onClick={onClick}>
-      <PreviewVideo project={project} badge={project.badge || 'PREVIEW'} />
-      <h3 className="mt-4 text-lg font-orbitron" style={{ color: 'var(--text-primary)' }}>{project.title}</h3>
+      <CardLink project={project} />
+      <PreviewVideo project={project} badge={project.badge || 'DEMO VIDEO'} />
+      <CardBody project={project} />
     </CardShell>
   );
 });
@@ -252,29 +332,59 @@ const ProjectLinkCard = memo(function ProjectLinkCard({ project, onClick }) {
   const { ref, tilt, onMouseMove, onMouseLeave } = useTilt();
   return (
     <CardShell tilt={tilt} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} cardRef={ref} onClick={onClick}>
-      {project.link !== '#' && (
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="absolute top-6 right-6 z-10 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-          style={{ background: 'rgba(5,7,15,0.8)', border: '1px solid var(--border-active)', backdropFilter: 'blur(4px)' }}
-        >
-          <ArrowTopRightOnSquareIcon className="w-4 h-4" style={{ color: 'var(--primary)' }} />
-        </a>
-      )}
-      <div className="relative aspect-video rounded-lg overflow-hidden group">
+      <CardLink project={project} />
+      <div className="relative aspect-video rounded-lg overflow-hidden">
         <Image src={project.image} alt={project.title} fill sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw" style={{ objectFit: 'cover' }} className="rounded-lg" />
         <div className="absolute inset-0 rounded-lg" style={{ background: 'rgba(5,7,15,0.1)', transition: 'background 0.2s' }} />
       </div>
-      <h3 className="mt-4 text-lg font-orbitron" style={{ color: 'var(--text-primary)' }}>{project.title}</h3>
+      <CardBody project={project} />
     </CardShell>
   );
 });
 
 // ─── Modal shell ───────────────────────────────────────────────────────────────
+function ModalLink({ href, children }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 cursor-pointer"
+      style={{
+        fontFamily: 'var(--font-rajdhani)',
+        fontSize: '0.8rem',
+        letterSpacing: '0.14em',
+        padding: '8px 18px',
+        border: '1px solid var(--border-active)',
+        color: 'var(--primary)',
+        background: 'rgba(37,99,235,0.08)',
+        transition: 'background 0.2s, box-shadow 0.2s',
+        textDecoration: 'none',
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(37,99,235,0.16)'; e.currentTarget.style.boxShadow = '0 0 16px var(--glow-blue)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(37,99,235,0.08)'; e.currentTarget.style.boxShadow = 'none'; }}
+    >
+      {children}
+    </a>
+  );
+}
+
 function ModalShell({ project, onClose, children }) {
+  const closeRef = useRef(null);
+  const titleId = 'project-modal-title';
+
+  // Escape closes; focus moves into the dialog and returns to the card after.
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    closeRef.current?.focus();
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      previouslyFocused?.focus?.();
+    };
+  }, [onClose]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -285,19 +395,28 @@ function ModalShell({ project, onClose, children }) {
       onClick={onClose}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         className="relative max-w-4xl w-full max-h-[95vh] flex flex-col overflow-hidden rounded-2xl"
         style={{ background: 'var(--surface)', border: '1px solid var(--border-active)', boxShadow: '0 0 60px var(--glow-blue)' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal header */}
         <div className="flex items-start justify-between gap-3 p-4 sm:p-6 pb-0">
-          <h2 className="text-lg sm:text-2xl lg:text-3xl font-orbitron" style={{ color: 'var(--primary)' }}>
+          <h2 id={titleId} className="text-lg sm:text-2xl lg:text-3xl font-orbitron" style={{ color: 'var(--primary)' }}>
             {project.title}
           </h2>
-          <button onClick={onClose} className="shrink-0 cursor-pointer" style={{ background: 'none', border: 'none', color: 'var(--text-muted)', transition: 'color 0.2s' }}
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close project details"
+            className="shrink-0 cursor-pointer"
+            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', transition: 'color 0.2s' }}
             onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; }}>
-            <XMarkIcon className="w-6 h-6 sm:w-7 sm:h-7" />
+            <XMarkIcon className="w-6 h-6 sm:w-7 sm:h-7" aria-hidden="true" />
           </button>
         </div>
 
@@ -317,28 +436,19 @@ function ModalShell({ project, onClose, children }) {
                   {project.tools.map((tool) => <TechTag key={tool} tool={tool} />)}
                 </div>
               </div>
-              {project.link !== '#' && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 cursor-pointer"
-                  style={{
-                    fontFamily: 'var(--font-rajdhani)',
-                    fontSize: '0.8rem',
-                    letterSpacing: '0.14em',
-                    padding: '8px 18px',
-                    border: '1px solid var(--border-active)',
-                    color: 'var(--primary)',
-                    background: 'rgba(37,99,235,0.08)',
-                    transition: 'background 0.2s, box-shadow 0.2s',
-                    textDecoration: 'none',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(37,99,235,0.16)'; e.currentTarget.style.boxShadow = '0 0 16px var(--glow-blue)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(37,99,235,0.08)'; e.currentTarget.style.boxShadow = 'none'; }}
-                >
-                  VISIT PROJECT <ArrowTopRightOnSquareIcon className="w-4 h-4" />
-                </a>
+              {(project.link || project.repo) && (
+                <div className="flex flex-wrap gap-3">
+                  {project.link && (
+                    <ModalLink href={project.link}>
+                      VISIT PROJECT <ArrowTopRightOnSquareIcon className="w-4 h-4" aria-hidden="true" />
+                    </ModalLink>
+                  )}
+                  {project.repo && (
+                    <ModalLink href={project.repo}>
+                      <FaGithub className="w-4 h-4" aria-hidden="true" /> VIEW CODE
+                    </ModalLink>
+                  )}
+                </div>
               )}
             </div>
           </div>
@@ -382,6 +492,7 @@ function ProjectImageModal({ project, onClose }) {
 // ─── Main export ───────────────────────────────────────────────────────────────
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const closeModal = useCallback(() => setSelectedProject(null), []);
 
   return (
     <section className="relative overflow-hidden py-24" style={{ background: 'var(--background)' }}>
@@ -398,7 +509,7 @@ export default function Projects() {
           <p className="eyebrow mb-3">// 001 &nbsp;&nbsp; SELECTED WORK</p>
           <h2 className="text-4xl md:text-5xl font-orbitron text-gradient">My Projects</h2>
           <p className="mt-4 max-w-2xl mx-auto text-sm" style={{ color: 'var(--text-muted)' }}>
-            Exploring the intersection of design and technology through impactful solutions
+            Full-stack SaaS and web platforms built with Next.js, Node.js and Stripe, plus AI and Unity simulation work.
           </p>
         </motion.div>
 
@@ -425,8 +536,8 @@ export default function Projects() {
         {/* Modals */}
         <AnimatePresence>
           {selectedProject && (
-            selectedProject.video ? <ProjectVideoModal project={selectedProject} onClose={() => setSelectedProject(null)} /> :
-                                    <ProjectImageModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+            selectedProject.video ? <ProjectVideoModal project={selectedProject} onClose={closeModal} /> :
+                                    <ProjectImageModal project={selectedProject} onClose={closeModal} />
           )}
         </AnimatePresence>
       </div>
