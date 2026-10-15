@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-function QuantumInput({ label, name, type = 'text', required }) {
+function QuantumInput({ label, name, type = 'text', required, maxLength, autoComplete }) {
   const [focused, setFocused] = useState(false);
 
   return (
@@ -25,6 +25,8 @@ function QuantumInput({ label, name, type = 'text', required }) {
         name={name}
         type={type}
         required={required}
+        maxLength={maxLength}
+        autoComplete={autoComplete}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         style={{
@@ -59,7 +61,7 @@ function QuantumInput({ label, name, type = 'text', required }) {
   );
 }
 
-function QuantumTextarea({ label, name, rows = 5, required }) {
+function QuantumTextarea({ label, name, rows = 5, required, maxLength }) {
   const [focused, setFocused] = useState(false);
 
   return (
@@ -84,6 +86,7 @@ function QuantumTextarea({ label, name, rows = 5, required }) {
         name={name}
         rows={rows}
         required={required}
+        maxLength={maxLength}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         style={{
@@ -141,9 +144,9 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-      <QuantumInput label="Your Name"      name="name"    required />
-      <QuantumInput label="Email Address"  name="email"   type="email" required />
-      <QuantumTextarea label="Message"     name="message" required />
+      <QuantumInput label="Your Name"      name="name"    required maxLength={100} autoComplete="name" />
+      <QuantumInput label="Email Address"  name="email"   type="email" required maxLength={254} autoComplete="email" />
+      <QuantumTextarea label="Message"     name="message" required maxLength={5000} />
 
       <button
         type="submit"
