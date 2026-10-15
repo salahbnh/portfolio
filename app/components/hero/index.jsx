@@ -5,10 +5,10 @@ import StarField from './StarField';
 import Magnetic from './Magnetic';
 import { useQuantumDecode } from '../../hooks/useQuantumDecode';
 
-const TAGS = ['Web Development', 'Software Architecture', 'Cloud Solutions'];
+const TAGS = ['Web Development', 'Software Architecture', 'REST APIs'];
 const ROLES = [
-  'Full-Stack Developer',
-  'Software Engineer',
+  'Full-Stack Software Engineer',
+  'Node.js · Spring Boot · Next.js',
 ];
 
 function HexTag({ label }) {
@@ -39,7 +39,7 @@ function HexTag({ label }) {
 function RotatingSubtitle() {
   const [i, setI] = useState(0);
   const text = useQuantumDecode(ROLES[i], {
-    startDelay: i === 0 ? 1700 : 0,
+    startDelay: i === 0 ? 600 : 0,
     charDelay: 28,
     scrambleDuration: 200,
   });
@@ -178,7 +178,7 @@ export default function Hero() {
                 animation: 'neon-pulse-green 2s ease-in-out infinite',
                 flexShrink: 0,
               }} />
-              AVAILABLE FOR OPPORTUNITIES
+              OPEN TO REMOTE ROLES · UTC+1
             </span>
           </motion.div>
 
@@ -223,7 +223,7 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 3.0, duration: 0.9 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
             className="text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
             style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-space)' }}
           >
@@ -235,7 +235,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.2, duration: 0.6 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
             className="flex flex-wrap justify-center gap-3"
           >
             {TAGS.map((tag) => <HexTag key={tag} label={tag} />)}
@@ -245,74 +245,75 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.5, duration: 0.5 }}
+            transition={{ delay: 0.5, duration: 0.45 }}
             className="flex flex-wrap justify-center gap-4"
           >
             <Magnetic>
-              <a href="#projects">
-                <button
-                  className="relative px-10 py-4 cursor-pointer"
-                  style={{
-                    fontFamily: 'var(--font-orbitron)',
-                    fontSize: '0.8rem',
-                    letterSpacing: '0.18em',
-                    background: 'linear-gradient(135deg, rgba(37,99,235,0.14), rgba(124,58,237,0.14))',
-                    border: '1px solid rgba(37,99,235,0.4)',
-                    clipPath: 'polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%)',
-                    color: 'var(--text-primary)',
-                    transition: 'background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(37,99,235,0.28), rgba(124,58,237,0.28))';
-                    e.currentTarget.style.borderColor = 'rgba(37,99,235,0.7)';
-                    e.currentTarget.style.boxShadow = '0 0 28px rgba(37,99,235,0.3), 0 0 60px rgba(124,58,237,0.15)';
-                    e.currentTarget.style.transform = 'scale(1.04)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(37,99,235,0.14), rgba(124,58,237,0.14))';
-                    e.currentTarget.style.borderColor = 'rgba(37,99,235,0.4)';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                  onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.97)'; }}
-                  onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.04)'; }}
-                >
-                  SEE MY WORK
-                </button>
+              <a
+                href="#projects"
+                className="relative inline-block px-10 py-4 cursor-pointer"
+                style={{
+                  fontFamily: 'var(--font-orbitron)',
+                  fontSize: '0.8rem',
+                  letterSpacing: '0.18em',
+                  textDecoration: 'none',
+                  background: 'linear-gradient(135deg, rgba(37,99,235,0.14), rgba(124,58,237,0.14))',
+                  border: '1px solid rgba(37,99,235,0.4)',
+                  clipPath: 'polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%)',
+                  color: 'var(--text-primary)',
+                  transition: 'background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(37,99,235,0.28), rgba(124,58,237,0.28))';
+                  e.currentTarget.style.borderColor = 'rgba(37,99,235,0.7)';
+                  e.currentTarget.style.boxShadow = '0 0 28px rgba(37,99,235,0.3), 0 0 60px rgba(124,58,237,0.15)';
+                  e.currentTarget.style.transform = 'scale(1.04)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(37,99,235,0.14), rgba(124,58,237,0.14))';
+                  e.currentTarget.style.borderColor = 'rgba(37,99,235,0.4)';
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+                onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.97)'; }}
+                onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.04)'; }}
+              >
+                SEE MY WORK
               </a>
             </Magnetic>
 
             <Magnetic>
-              <a href="/SalahBounouh_CV.pdf" download>
-                <button
-                  className="relative px-10 py-4 cursor-pointer"
-                  style={{
-                    fontFamily: 'var(--font-orbitron)',
-                    fontSize: '0.8rem',
-                    letterSpacing: '0.18em',
-                    background: 'transparent',
-                    border: '1px solid rgba(37,99,235,0.3)',
-                    clipPath: 'polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%)',
-                    color: 'var(--text-secondary)',
-                    transition: 'border-color 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(37,99,235,0.6)';
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                    e.currentTarget.style.boxShadow = '0 0 18px rgba(37,99,235,0.2)';
-                    e.currentTarget.style.transform = 'scale(1.04)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(37,99,235,0.3)';
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                  onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.97)'; }}
-                  onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.04)'; }}
-                >
-                  DOWNLOAD CV
-                </button>
+              <a
+                href="/SalahBounouh_CV.pdf"
+                download
+                className="relative inline-block px-10 py-4 cursor-pointer"
+                style={{
+                  fontFamily: 'var(--font-orbitron)',
+                  fontSize: '0.8rem',
+                  letterSpacing: '0.18em',
+                  textDecoration: 'none',
+                  background: 'transparent',
+                  border: '1px solid rgba(37,99,235,0.3)',
+                  clipPath: 'polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%)',
+                  color: 'var(--text-secondary)',
+                  transition: 'border-color 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(37,99,235,0.6)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                  e.currentTarget.style.boxShadow = '0 0 18px rgba(37,99,235,0.2)';
+                  e.currentTarget.style.transform = 'scale(1.04)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(37,99,235,0.3)';
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+                onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.97)'; }}
+                onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.04)'; }}
+              >
+                DOWNLOAD CV
               </a>
             </Magnetic>
           </motion.div>
@@ -323,7 +324,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 4.2, duration: 1 }}
+        transition={{ delay: 1.0, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         style={{ zIndex: 2 }}
       >
